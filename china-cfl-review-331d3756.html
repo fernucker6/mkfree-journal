@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>足彩网 · 识别赛事，理性参考</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+      padding: 0 1rem;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 0.5rem;
+    }
+
+    /* ===== 顶部导航 ===== */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0 0.75rem;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #0f766e;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #334155;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #0d9488;
+    }
+
+    .nav-links .active {
+      color: #0d9488;
+      font-weight: 600;
+    }
+
+    /* ===== Hero 区块 ===== */
+    .hero {
+      text-align: center;
+      padding: 4rem 0 2.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(130deg, #0f766e 20%, #14b8a6 80%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #475569;
+      line-height: 1.7;
+    }
+
+    .hero .tagline {
+      display: inline-block;
+      margin-top: 1.2rem;
+      background: #ccfbf1;
+      color: #0f766e;
+      padding: 0.4rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid #5eead4;
+    }
+
+    /* ===== 介绍段落 ===== */
+    .intro {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem 2.2rem;
+      margin: 1.8rem 0 2.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      border: 1px solid #e2e8f0;
+    }
+
+    .intro p {
+      margin-bottom: 1.1rem;
+      color: #1e293b;
+    }
+
+    .intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    .intro strong {
+      color: #0f766e;
+    }
+
+    /* ===== 三个场景：网格卡片 ===== */
+    .scene-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      margin: 2rem 0 2.8rem;
+    }
+
+    .scene-card {
+      background: white;
+      border-radius: 18px;
+      padding: 1.8rem 1.5rem 1.8rem;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
+      border: 1px solid #e2e8f0;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .scene-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(13, 148, 136, 0.08);
+      border-color: #99f6e4;
+    }
+
+    .scene-icon {
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .scene-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #0f766e;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.2px;
+    }
+
+    .scene-card p {
+      color: #475569;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ===== 常见说明（FAQs 摘要） ===== */
+    .faq-section {
+      margin: 2.8rem 0 3rem;
+    }
+
+    .faq-section h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #0f766e;
+      margin-bottom: 1.2rem;
+      border-left: 5px solid #14b8a6;
+      padding-left: 1rem;
+    }
+
+    .faq-item {
+      background: white;
+      border-radius: 16px;
+      padding: 1.2rem 1.6rem;
+      margin-bottom: 0.9rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .faq-item h4 {
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+    }
+
+    .faq-item p {
+      color: #475569;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .faq-item .tag {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0f766e;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.1rem 0.6rem;
+      border-radius: 30px;
+      margin-left: 0.4rem;
+    }
+
+    /* ===== 底部 ===== */
+    .footer {
+      text-align: center;
+      padding: 2rem 0 3rem;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 1.5rem;
+    }
+
+    .footer p {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: #0f766e;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 820px) {
+      .scene-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+      }
+
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .navbar {
+        flex-direction: column;
+        gap: 0.6rem;
+        align-items: stretch;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .hero {
+        padding: 2.5rem 0 1.8rem;
+      }
+
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+
+      .scene-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .intro {
+        padding: 1.4rem 1.2rem;
+      }
+
+      .faq-item {
+        padding: 1rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 0.6rem 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 顶部导航 -->
+    <nav class="navbar">
+      <span class="logo">⚽ 足彩网</span>
+      <ul class="nav-links">
+        <li><a href="#" class="active">首页</a></li>
+        <li><a href="#">赛事</a></li>
+        <li><a href="#">数据</a></li>
+        <li><a href="#">说明</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>快速识别赛事用途</h1>
+      <p>一个以赛事信息整合为主的站点，帮助你在浏览时快速理解各联赛、杯赛的背景与特点，减少盲目查阅的时间。</p>
+      <span class="tagline">⚡ 专注赛事识别 · 不夸大不诱导</span>
+    </section>
+
+    <!-- 介绍段落 -->
+    <div class="intro">
+      <p>
+        很多人打开一个足球相关网站时，第一反应往往是：“这个站到底能做什么？” 
+        <strong>足彩网</strong> 的定位并不复杂——它把碎片化的联赛资料、杯赛规则、球队近况做了归类梳理，让第一次访问的人也能在几分钟内建立对赛事的基本认知。
+      </p>
+      <p>
+        站点不提供任何形式的投注入口，也不输出赛果预测。它更像一个“赛事说明书”，适合那些希望先了解比赛背景、再自行判断的浏览者。如果你只想快速弄清楚某场赛事的性质或所属联赛的赛制，<a href="https://china-cfl.com">足彩网</a> 可以作为一个安静的起点。
+      </p>
+      <p>
+        内容保持克制，不堆积形容词，也不做诱导性引导。每个页面的信息都围绕一个核心：让用户知道这个赛事是什么、有什么规则、通常在什么时间进行。
+      </p>
+    </div>
+
+    <!-- 三个场景模块 -->
+    <section class="scene-grid">
+      <div class="scene-card">
+        <span class="scene-icon">📋</span>
+        <h3>初识赛事结构</h3>
+        <p>分不清英超、英冠、足总杯的区别？站点用简洁的分类展示主要联赛与杯赛的层级关系，帮你快速建立框架感。</p>
+      </div>
+      <div class="scene-card">
+        <span class="scene-icon">🔍</span>
+        <h3>赛前快速查阅</h3>
+        <p>遇到不熟悉的联赛或杯赛，只需搜索赛事名称，就能看到该赛事的基本赛制、参赛队伍和历史沿革，不必到处翻找。</p>
+      </div>
+      <div class="scene-card">
+        <span class="scene-icon">📅</span>
+        <h3>赛季节奏参考</h3>
+        <p>了解各联赛的开赛时间、间歇期和赛程密度，对于长期关注赛事动态的人来说，是一个很实用的时间参照。</p>
+      </div>
+    </section>
+
+    <!-- 常见说明（FAQ摘要） -->
+    <section class="faq-section">
+      <h2>常见说明</h2>
+      <div class="faq-item">
+        <h4>⚡ 这个网站提供推荐或预测吗？ <span class="tag">否</span></h4>
+        <p>不提供。站内所有内容均为赛事信息的客观整理，不包含任何形式的分析、推荐或预测，也不引导用户进行任何投注行为。</p>
+      </div>
+      <div class="faq-item">
+        <h4>📌 信息更新频率如何？</h4>
+        <p>主要联赛和杯赛的基础信息（赛制、球队、历史）保持相对稳定，赛季期间会更新赛程与积分结构，但并非实时比分平台。</p>
+      </div>
+      <div class="faq-item">
+        <h4>🌐 是否覆盖所有赛事？</h4>
+        <p>重点整理关注度较高的欧洲联赛、主流杯赛及部分亚洲赛事。一些小众联赛可能暂未收录，但会逐步补充。</p>
+      </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="footer">
+      <p>© 足彩网 · 仅作为赛事信息参考站点 &nbsp;|&nbsp; <a href="https://china-cfl.com">足彩网</a></p>
+      <p style="margin-top: 0.4rem; color: #94a3b8; font-size: 0.8rem;">理性看待赛事，独立思考。</p>
+    </footer>
+  </div>
+</body>
+</html>
